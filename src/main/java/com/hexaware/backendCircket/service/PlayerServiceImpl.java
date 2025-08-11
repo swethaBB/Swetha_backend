@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.backendCircket.dto.PlayerDto;
+import com.hexaware.backendCircket.dto.TeamMatchesView;
 import com.hexaware.backendCircket.entity.Player;
 import com.hexaware.backendCircket.repository.PlayerRepository;
+
 @Service
 public class PlayerServiceImpl implements IPlayerService {
 	
@@ -49,6 +51,11 @@ public class PlayerServiceImpl implements IPlayerService {
 	public Player updatePlayer(Player player) {
 		return repo.save(player);
 	}
+
+	@Override
+	public List<TeamMatchesView> getTeamNameAndTotalMatches() {
+        return repo.findTeamNameAndTotalMatches();
+    }
 
 
 }

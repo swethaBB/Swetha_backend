@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.backendCircket.dto.PlayerDto;
+import com.hexaware.backendCircket.dto.TeamMatchesView;
 import com.hexaware.backendCircket.entity.Player;
 import com.hexaware.backendCircket.service.IPlayerService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/circket")
@@ -33,19 +36,25 @@ public class PlayerRestController {
 	 }
 	 
 	 @PostMapping("/addplayers")
-	 public Player addPlayer(@RequestBody PlayerDto dto) {
+	 public Player addPlayer(@Valid @RequestBody PlayerDto dto) {
 		return service.addPlayer(dto);
 	 }
 	 
 	 @GetMapping("/deletebyid/{id}")
-	 public String deletePlayerById(Long id) {
+	 public String deletePlayerById(@PathVariable Long id) {
 		 service.deletePlayerById(id);
 		return "Deleted";
 		 
 	 }
 	 @PutMapping("/update")
-	 public Player updatePlayer(@RequestBody Player player) {
+	 public Player updatePlayer(@Valid @RequestBody Player player) {
 		return service.updatePlayer(player);
 		 
 	 }
+	 
+	 @GetMapping("/teammatches")
+	 public List<TeamMatchesView> getTeamNameAndTotalMatches() {
+	     return service.getTeamNameAndTotalMatches();
+	 }
+
 }
